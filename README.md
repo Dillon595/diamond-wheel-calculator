@@ -26,21 +26,6 @@ It is not a replacement for manufacturer data sheets or process engineering judg
 - **Wheel Volume & Weight** — estimated from bore, OD, width, and bond density
 - **Safety Warnings** — alerts for overspeed, wrong abrasive-material pairing, and dry grinding risks
 
-## Supported Materials
-
-| Material | Recommended Abrasive |
-|---|---|
-| Steel (Carbon / Alloy) | CBN |
-| Stainless Steel | CBN |
-| Cast Iron | Diamond |
-| Hardened Steel (>45 HRC) | CBN |
-| Tungsten Carbide | Diamond |
-| Technical Ceramic | Diamond |
-| Glass / Quartz | Diamond |
-| Silicon / Semiconductor | Diamond |
-| Titanium / Superalloy | CBN |
-| PTFE / Composites | Either |
-
 ## Key Formulas
 
 ```
@@ -57,12 +42,59 @@ Open `index.html` in any modern browser. No server or build step required.
 
 ## Bond Type Speed Limits
 
-| Bond | Max Surface Speed |
-|---|---|
-| Resin Bond | 35 m/s |
-| Vitrified Bond | 60 m/s |
-| Metal Bond | 25 m/s |
-| Electroplated | 40 m/s |
+| Bond | Max Surface Speed | Source / Reference |
+|---|---|---|
+| Resin Bond | 35 m/s | Resin bond wheels typically rated 25–50 m/s; 35 m/s is a common conservative limit. — *Norton Grinding Wheel Catalogue; Saint-Gobain Abrasives Technical Reference* |
+| Vitrified Bond | 60 m/s | Vitrified bond wheels rated up to 60–80 m/s depending on grade and reinforcement. — *Winterthur Technology Group Technical Manual; Kellenberger grinding specifications* |
+| Metal Bond | 25 m/s | Metal bond wheels limited by bond strength and heat generation; 20–30 m/s typical. — *EHWA Diamond Technical Guide; Asahi Diamond Industrial Co.* |
+| Electroplated | 40 m/s | Single-layer electroplated wheels limited by nickel bond adhesion; 30–50 m/s typical. — *Dr. Kaiser Diamantwerkzeuge Catalogue; Engis Corp. Technical Notes* |
+
+## Material–Abrasive Compatibility
+
+| Material | Recommended Abrasive | Source / Reference |
+|---|---|---|
+| Steel (Carbon / Alloy) | CBN | Diamond dissolves in iron at grinding temperatures. CBN is the standard for ferrous materials. — *Malkin & Conring, "Grinding Technology: Theory and Practice of Cutting and Grinding", Industrial Press* |
+| Stainless Steel | CBN | Same iron-reactivity issue as carbon steel. — *Malkin & Conring; Sandvik Coromant Grinding Handbook* |
+| Cast Iron | Diamond | Graphite flakes make cast iron non-reactive to diamond. — *Malkin & Conring; Norton Abrasives Application Guide* |
+| Hardened Steel (>45 HRC) | CBN | CBN retains hardness at high temperatures; preferred for hardened ferrous. — *Malkin & Conring; Schmitt Superabrasives Technical Bulletin* |
+| Tungsten Carbide | Diamond | Diamond is the standard for cemented carbide grinding. — *Sandvik Coromant; Kennametal Grinding Guidelines* |
+| Technical Ceramic | Diamond | Ceramics are extremely hard; only diamond has sufficient hardness. — *Malkin & Conring; 3M Superabrasives Guide* |
+| Glass / Quartz | Diamond | Standard industrial practice. — *Norton / Saint-Gobain Abrasives; Schott AG Processing Guidelines* |
+| Silicon / Semiconductor | Diamond | Silicon wafer dicing and grinding use diamond exclusively. — *Disco Corporation Technical Manual; Applied Materials Grinding Notes* |
+| Titanium / Superalloy | CBN | Titanium is chemically reactive with diamond at high temps; CBN preferred. — *Malkin & Conring; GE Superabrasives Application Notes* |
+| PTFE / Composites | Either | Low hardness; both abrasive types work. Coarse grit preferred. — *Composites Manufacturing Association Guidelines; Engis Technical Notes* |
+
+## Specific Energy Values
+
+| Material | Specific Energy (J/mm³) | Source / Reference |
+|---|---|---|
+| Steel (Carbon / Alloy) | 60 | Typical range 40–80 J/mm³ for steel grinding. — *Malkin & Conring, Table 3.2; Rowe, "Principles of Modern Grinding Technology", Springer* |
+| Stainless Steel | 70 | Higher than carbon steel due to work hardening tendency. — *Malkin & Conring; Sandvik Grinding Handbook* |
+| Cast Iron | 30 | Lower due to graphite flake lubrication and brittleness. — *Malkin & Conring; Rowe* |
+| Hardened Steel | 80 | Harder materials require more energy per unit volume removed. — *Malkin & Conring; Rowe* |
+| Tungsten Carbide | 100 | Very hard material; high specific energy. — *Malkin & Conring; Schmitt Superabrasives* |
+| Technical Ceramic | 120 | Extremely high specific energy due to hardness and brittleness. — *Malkin & Conring; Rowe* |
+| Glass | 90 | Brittle fracture dominates; moderate specific energy. — *Malkin & Conring; Moore "Precision Grinding"* |
+| Silicon | 110 | Brittle semiconductor; high energy to remove material. — *Disco Corporation; Bridging published wafer grinding data* |
+| Titanium | 75 | Reactive and tough; moderate-high energy. — *Malkin & Conring; GE Superabrasives* |
+| PTFE / Composites | 5 | Very soft; low energy. — *Engis Technical Notes; composite machining references* |
+
+## Usage
+
+Open `index.html` in any modern browser. No server or build step required.
+
+---
+
+> **Disclaimer:** Typical reference values only. Always follow the wheel manufacturer's marked maximum operating speed and applicable safety standards.
+
+## About the Project
+
+This open-source project provides basic calculation tools and
+technical references for diamond and CBN grinding applications.
+
+Developed and maintained by SINOGRIND.
+
+Website: https://sinogrind.com/
 
 ## License
 
