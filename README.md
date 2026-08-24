@@ -9,9 +9,6 @@ Supported:
 - Resin bond
 - Metal bond
 
-Learn more about superabrasive grinding wheels:
-https://sinogrind.com/
-
 ## Overview
 
 This tool helps grinding engineers and machinists quickly verify wheel parameters, surface speeds, and recommended grinding conditions for diamond and CBN (Cubic Boron Nitride) superabrasive wheels.
