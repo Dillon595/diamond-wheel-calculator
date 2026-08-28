@@ -1,208 +1,965 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diamond/CBN Grinding Wheel Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="image" th:href="${cdnBase} + '/images/hero-bg.webp'" fetchpriority="high">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="keywords" content="diamond grinding wheel calculator, CBN wheel calculator, grinding wheel parameter calculator, surface speed calculator, wheel volume calculator, grinding power calculator" />
+    <meta name="description" content="Calculate surface speed, RPM, material removal rate, grinding power, and G-ratio for diamond and CBN wheels. Get recommended depth of cut, table speed, and coolant parameters for your application." />
+    <meta name="author" content="SinoGrind Co., Ltd." />
+
+    <link rel="canonical" href="https://sinogrind.com/tools/diamond-wheel-calculator" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" />
+
+    <link rel="alternate" hreflang="en" href="https://sinogrind.com/tools/diamond-wheel-calculator" />
+    <link rel="alternate" hreflang="tr" href="https://sinogrind.com/tr/tools/diamond-wheel-calculator" />
+    <link rel="alternate" hreflang="es" href="https://sinogrind.com/es/tools/diamond-wheel-calculator" />
+    <link rel="alternate" hreflang="ru" href="https://sinogrind.com/ru/tools/diamond-wheel-calculator" />
+    <link rel="alternate" hreflang="de" href="https://sinogrind.com/de/tools/diamond-wheel-calculator" />
+    <link rel="alternate" hreflang="fr" href="https://sinogrind.com/fr/tools/diamond-wheel-calculator" />
+    <link rel="alternate" hreflang="pt" href="https://sinogrind.com/pt/tools/diamond-wheel-calculator" />
+    <link rel="alternate" hreflang="it" href="https://sinogrind.com/it/tools/diamond-wheel-calculator" />
+    <link rel="alternate" hreflang="pl" href="https://sinogrind.com/pl/tools/diamond-wheel-calculator" />
+    <link rel="alternate" hreflang="x-default" href="https://sinogrind.com/tools/diamond-wheel-calculator" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sinogrind.com/tools/diamond-wheel-calculator" />
+    <meta property="og:title" content="Diamond &amp; CBN Grinding Wheel Calculator - SinoGrind" />
+    <meta property="og:description" content="Calculate surface speed, RPM, MRR, grinding power, and G-ratio for diamond and CBN wheels. Get optimized depth of cut, table speed, and coolant recommendations for your grinding application." />
+    <meta property="og:image" content="https://sinogrind.com/images/products/diamond_wheel.webp" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="SinoGrind Co., Ltd." />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://sinogrind.com/tools/diamond-wheel-calculator" />
+    <meta name="twitter:title" content="Diamond &amp; CBN Grinding Wheel Calculator - SinoGrind" />
+    <meta name="twitter:description" content="Calculate surface speed, RPM, MRR, grinding power, and G-ratio for diamond and CBN wheels. Get optimized depth of cut, table speed, and coolant recommendations for your grinding application." />
+    <meta name="twitter:image" content="https://sinogrind.com/images/products/diamond_wheel.webp" />
+
+    <meta name="robots" content="index, follow" />
+
+    <title>Diamond &amp; CBN Wheel Calculator — Speed, RPM, MRR - SinoGrind</title>
+
+    <!-- GEO Meta Tags for AI Search Engines -->
+    <meta name="ai-content-summary" content="Interactive calculator tool for Diamond and CBN superabrasive grinding wheels. Computes surface speed (m/s and ft/min), wheel volume, estimated weight, material removal rate, grinding power, G-ratio, and chip thickness. Provides recommended parameters including max safe RPM, depth of cut, table speed, coolant advice, and warnings based on wheel type, bond, grit, concentration, and workpiece material." />
+    <meta name="ai-application-context" content="Engineering calculator for grinding professionals selecting Diamond or CBN wheels. Covers resin, vitrified, metal, and electroplated bonds. Supports 10 workpiece materials including steel, stainless, cast iron, carbide, ceramic, glass, silicon, titanium, and PTFE. Used for process parameter optimization and wheel specification verification." />
+    <meta name="ai-title" content="Diamond & CBN Grinding Wheel Calculator — Speed, RPM, MRR & Power" />
+    <meta name="ai-description" content="Free online grinding wheel calculator for diamond and CBN wheels. Instantly compute surface speed, RPM, material removal rate, grinding power, and get optimized parameters for your specific application." />
+    <meta name="ai-keywords" content="diamond wheel calculator, CBN wheel calculator, grinding wheel RPM calculator, surface speed calculator, material removal rate calculator, grinding power calculator, grinding parameter calculator" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Diamond & CBN Grinding Wheel Calculator",
+      "description": "Free online calculator for Diamond and CBN superabrasive grinding wheels. Calculate surface speed, wheel volume, weight, material removal rate, grinding power, and get recommended parameters.",
+      "url": "https://sinogrind.com/tools/diamond-wheel-calculator",
+      "applicationCategory": "EngineeringApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "SinoGrind Co., Ltd.",
+        "url": "https://sinogrind.com"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "SinoGrind Co., Ltd.",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://sinogrind.com/images/logo.png"
+        }
+      },
+      "datePublished": "2026-08-28",
+      "dateModified": "2026-08-28",
+      "keywords": "diamond grinding wheel calculator, CBN wheel calculator, grinding wheel parameter calculator, surface speed calculator"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://sinogrind.com"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://sinogrind.com/tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Diamond & CBN Wheel Calculator",
+          "item": "https://sinogrind.com/tools/diamond-wheel-calculator"
+        }
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How do I calculate grinding wheel surface speed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Surface speed (m/s) = π × Wheel Diameter (m) × RPM ÷ 60. For example, a 150mm diameter wheel at 3000 RPM has a surface speed of 23.6 m/s."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is MRR (Material Removal Rate)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "MRR = Depth of Cut × Wheel Width × Table Speed. It measures how much material is removed per minute, typically in cm³/min."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maximum safe speed for grinding wheels?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Maximum safe speed depends on bond type: resin bond ≤35 m/s, vitrified bond ≤60 m/s, metal bond ≤30 m/s, electroplated ≤40 m/s. Exceeding these limits risks wheel breakage. These are typical industry values — always verify against the maximum operating speed printed on the specific grinding wheel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Should I use flood coolant for diamond wheel grinding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Flood coolant is recommended for most diamond and CBN grinding operations. It extends wheel life, improves surface finish, and prevents thermal damage."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I convert SFPM to RPM?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "To convert wheel surface speed to spindle speed: RPM = (SFPM × 12) ÷ (π × wheel diameter in inches). For example, 4638 SFPM on a 6-inch wheel gives RPM = (4638 × 12) ÷ (π × 6) ≈ 2950."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is G-ratio in grinding?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "G-ratio is the ratio of workpiece material removed to grinding wheel volume worn away. A G-ratio of 30 means 30 cm³ of material removed per 1 cm³ of wheel wear. Higher G-ratio means longer wheel life and lower wheel cost per part. Typical values range from under 10 for conventional abrasives to well over 100 for metal-bond superabrasive wheels."
+      }
+    }
+  ]
+}
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Calculate Grinding Wheel Parameters",
+      "description": "Step-by-step guide to calculating surface speed, RPM, MRR, and grinding power for diamond and CBN wheels.",
+      "totalTime": "PT2M",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Select Wheel Parameters",
+          "text": "Choose wheel type (diamond or CBN), enter diameter, width, bore, grit size, concentration, and bond type."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Enter Grinding Conditions",
+          "text": "Select workpiece material, enter machine RPM, depth of cut, table speed, and coolant type."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Review Results",
+          "text": "Check surface speed in m/s and ft/min, material removal rate (MRR), grinding power, wheel weight, and safety warnings."
+        }
+      ]
+    }
+    </script>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" th:href="${cdnBase} + '/css/bootstrapminified.css'" />
+
+    <!-- fonts style -->
+    <link th:href="${cdnBase} + '/css/fontsStyle.css'" rel="stylesheet" />
+
+    <!-- Google Tag Manager -->
+    <script async>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://sinogrind.com/googleanalytics/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-M6CFDKQX');</script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Custom styles for this template -->
+    <link th:href="${cdnBase} + '/css/style.css'" rel="stylesheet" />
+    <!-- responsive style -->
+    <link th:href="${cdnBase} + '/css/responsive.css'" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" th:href="${cdnBase} + '/css/tool.css'" />
+<style>
+/* Normalization overrides — ensure consistency across all tool pages */
+.tg-tool-page .tg-form-group label { color: #495057; font-weight: 600; text-transform: none; letter-spacing: normal; }
+.tg-tool-page .tg-form-group input,
+.tg-tool-page .tg-form-group select,
+.tg-tool-page .tg-form-group textarea { padding: 10px 12px; font-size: 0.95rem; }
+.tg-tool-page .tg-btn { border-radius: 6px; padding: 12px 24px; }
+.tg-tool-page .tg-btn:active { transform: scale(0.98); }
+.tg-tool-page .tg-results { background: #f8f9fa; }
+.tg-tool-page .tg-card { border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+</style>
+
+<!-- Language Switcher CSS -->
+<style>
+.language-switcher { position: relative; margin-left: 15px; }
+.lang-btn { display: flex; align-items: center; gap: 6px; background: transparent; border: 1px solid rgba(44, 43, 43, 0.3); color: #2c2b2b; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: all 0.3s ease; }
+.lang-btn:hover { border-color: rgba(44, 43, 43, 0.4); background: rgba(44, 43, 43, 0.05); }
+.lang-btn img { width: 20px; height: 15px; border-radius: 2px; }
+.lang-btn i { font-size: 10px; transition: transform 0.3s ease; }
+.lang-dropdown { display: none; position: absolute; top: 100%; right: 0; background: #fff; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); min-width: 160px; z-index: 1000; overflow: hidden; margin-top: 5px; }
+.lang-dropdown.active { display: block; }
+.lang-dropdown a { display: flex; align-items: center; gap: 10px; padding: 10px 15px; color: #333; text-decoration: none; font-size: 14px; transition: background 0.2s ease; }
+.lang-dropdown a:hover { background: #f5f5f5; }
+.lang-dropdown a img { width: 20px; height: 15px; border-radius: 2px; }
+.lang-dropdown a.active { background: #e8f4fd; font-weight: 500; }
+</style>
+
+<!-- Calculator Styles -->
+<link rel="stylesheet" type="text/css" th:href="${cdnBase} + '/css/tools.css'" />
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Diamond / CBN Grinding Wheel Calculator</h1>
-            <p class="subtitle">Select and verify basic parameters for superabrasive grinding wheels</p>
-        </header>
 
-        <main>
-            <section class="input-section">
-                <h2>Wheel Parameters</h2>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="wheelType">Wheel Type</label>
-                        <select id="wheelType">
-                            <option value="diamond">Diamond</option>
-                            <option value="cbn">CBN</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="diameter">Wheel Diameter (mm)</label>
-                        <input type="number" id="diameter" min="1" step="0.1" value="150">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="width">Wheel Width (mm)</label>
-                        <input type="number" id="width" min="0.1" step="0.1" value="20">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bore">Bore Diameter (mm)</label>
-                        <input type="number" id="bore" min="1" step="0.1" value="32">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="gritSize">Grit Size (US Mesh)</label>
-                        <select id="gritSize">
-                            <option value="20">20/25 - Very Coarse</option>
-                            <option value="30">30/40 - Coarse</option>
-                            <option value="40">40/50 - Coarse</option>
-                            <option value="50">50/60 - Medium</option>
-                            <option value="60" selected>60/80 - Medium</option>
-                            <option value="80">80/100 - Medium-Fine</option>
-                            <option value="100">100/120 - Fine</option>
-                            <option value="120">120/140 - Fine</option>
-                            <option value="170">170/200 - Very Fine</option>
-                            <option value="230">230/270 - Very Fine</option>
-                            <option value="325">325/400 - Ultra Fine</option>
-                            <option value="500">500/600 - Mirror Finish</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="concentration">Concentration (%)</label>
-                        <select id="concentration">
-                            <option value="25">25% - Light</option>
-                            <option value="50">50% - Medium</option>
-                            <option value="75" selected>75% - Standard</option>
-                            <option value="100">100% - High</option>
-                            <option value="125">125% - Very High</option>
-                            <option value="150">150% - Ultra High</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bondType">Bond Type</label>
-                        <select id="bondType">
-                            <option value="resin">Resin Bond</option>
-                            <option value="vitrified" selected>Vitrified Bond</option>
-                            <option value="metal">Metal Bond</option>
-                            <option value="electroplated">Electroplated</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="material">Workpiece Material</label>
-                        <select id="material">
-                            <option value="steel">Steel (Carbon / Alloy)</option>
-                            <option value="stainless">Stainless Steel</option>
-                            <option value="castiron">Cast Iron</option>
-                            <option value="hardened">Hardened Steel (>45 HRC)</option>
-                            <option value="tungsten">Tungsten Carbide</option>
-                            <option value="ceramic">Technical Ceramic</option>
-                            <option value="glass">Glass / Quartz</option>
-                            <option value="silicon">Silicon / Semiconductor</option>
-                            <option value="titanium">Titanium / Superalloy</option>
-                            <option value="ptfe">PTFE / Composites</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="rpm">Machine RPM</label>
-                        <input type="number" id="rpm" min="100" step="10" value="3000">
-                    </div>
-                </div>
-            </section>
-
-            <section class="input-section">
-                <h2>Grinding Conditions</h2>
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="depthOfCut">Depth of Cut (mm)</label>
-                        <input type="number" id="depthOfCut" min="0.001" step="0.001" value="0.01">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tableSpeed">Table / Feed Speed (m/min)</label>
-                        <input type="number" id="tableSpeed" min="0.1" step="0.1" value="10">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="coolant">Coolant</label>
-                        <select id="coolant">
-                            <option value="flood">Flood Coolant</option>
-                            <option value="mist">Mist Coolant</option>
-                            <option value="dry">Dry Grinding</option>
-                            <option value="cryogenic">Cryogenic</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <button id="calculateBtn" class="calc-btn">Calculate Parameters</button>
-
-            <section class="output-section" id="outputSection">
-                <h2>Results</h2>
-
-                <div class="result-card primary">
-                    <h3>Surface Speed</h3>
-                    <div class="result-value" id="surfaceSpeed">--</div>
-                    <div class="result-unit">m/s</div>
-                </div>
-
-                <div class="result-card">
-                    <h3>Surface Speed</h3>
-                    <div class="result-value" id="surfaceSpeedFpm">--</div>
-                    <div class="result-unit">ft/min</div>
-                </div>
-
-                <div class="result-card">
-                    <h3>Wheel Volume</h3>
-                    <div class="result-value" id="wheelVolume">--</div>
-                    <div class="result-unit">cm³</div>
-                </div>
-
-                <div class="result-card">
-                    <h3>Wheel Weight (est.)</h3>
-                    <div class="result-value" id="wheelWeight">--</div>
-                    <div class="result-unit">kg</div>
-                </div>
-
-                <h3 class="section-divider">Recommended Parameters</h3>
-
-                <div class="result-card wide">
-                    <table class="result-table">
-                        <thead>
-                            <tr>
-                                <th>Parameter</th>
-                                <th>Recommended Value</th>
-                                <th>Unit</th>
-                                <th>Notes</th>
-                            </tr>
-                        </thead>
-                        <tbody id="recommendedParams">
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3 class="section-divider">Basic Grinding Parameters</h3>
-
-                <div class="result-card wide">
-                    <table class="result-table">
-                        <thead>
-                            <tr>
-                                <th>Parameter</th>
-                                <th>Value</th>
-                                <th>Unit</th>
-                            </tr>
-                        </thead>
-                        <tbody id="grindingParams">
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="result-card wide warnings" id="warningsCard" style="display:none;">
-                    <h3>Warnings</h3>
-                    <ul id="warningsList"></ul>
-                </div>
-            </section>
-        </main>
-
-        <footer>
-            <p>Open-source calculator for superabrasive grinding wheel parameter selection.</p>
-            <p>Learn more: <a href="https://sinogrind.com/" target="_blank" rel="noopener">sinogrind.com</a></p>
-        </footer>
+<body class="sub_page">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://sinogrind.com/googleanalytics/ns.html?id=GTM-M6CFDKQX"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="hero_area" th:style="'background-image: url(' + ${cdnBase} + '/images/hero-bg.webp);'">
+    <!-- header section strats -->
+    <div class="top_nav">
+      <div class="container">
+        <div class="contact_link-container">
+          <a href="/" class="contact_link1">
+            <img class="lazy-img" src="/images/location.png" data-src="/images/location.png" alt="Location" />
+            <span>
+              2nd Floor, A237, R2-B Building, High-tech Industrial Village, No. 206 Gaoxin South 7th Road, Yuehai Street, High-tech Zone, Nanshan District, Shenzhen City
+            </span>
+          </a>
+          <a href="tel: +8615874211461" class="contact_link2">
+            <span>
+                <img class="lazy-img" src="/images/call.png" data-src="/images/call.png" alt="Phone" /> : +86 15874211461
+            </span>
+          </a>
+          <a href="mailto:Jasper@sinogrind.com" class="contact_link3">
+            <img class="lazy-img" src="/images/mail.png" data-src="/images/mail.png" alt="Email" />
+            <span>
+              Jasper@sinogrind.com
+            </span>
+          </a>
+        </div>
+      </div>
     </div>
+    <header class="header_section">
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg custom_nav-container">
+                <a class="navbar-brand" href="/">
+                    <!--  -->
+                    <span>
+              SINOGRIND
+            </span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-    <script src="calculator.js"></script>
+                <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+                    <ul class="navbar-nav  ">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/about"> About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" role="button" href="/products" data-toggle="dropdown"> Products </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="/products">All Products</a>
+                                <a class="dropdown-item" href="/grindingWheel">Grinding Wheels</a>
+                                <a class="dropdown-item" href="/centerlessGrinding">Centerless Grinding Wheels</a>
+                                <a class="dropdown-item" href="/dressingTools">Diamond Dressing Tools</a>
+                                <a class="dropdown-item" href="/cbnCuttingTools">CBN Cutting Tools</a>
+                                <a class="dropdown-item" href="/grindingAccessories">Grinding Accessories</a>
+                                <a class="dropdown-item" href="/grindingRods">Grinding Rods</a>
+                                <a class="dropdown-item" href="/externalGrindingMachine">External Grinding Machine</a>
+                                <a class="dropdown-item" href="/internalGrindingMachine">Internal Grinding Machine</a>
+                                <a class="dropdown-item" href="/cnc_tools">CNC Tools</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/articles">Articles</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/tools">Tools</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/download">Download</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/contact">Contact us</a>
+                        </li>
+                    </ul>
+                    <div class="language-switcher">
+    <button class="lang-btn" id="currentLang" onclick="toggleLangDropdown()">
+        <img src="/images/flags/gb.png" alt="English" width="20" height="15"/>
+        <span>EN</span>
+        <i class="fa fa-chevron-down"></i>
+    </button>
+    <div class="lang-dropdown" id="langDropdown">
+        <a href="/tools/diamond-wheel-calculator" hreflang="en" lang="en" class="active">
+            <img src="/images/flags/gb.png" alt="English" width="20" height="15"/>
+            English
+        </a>
+        <a href="/tr/tools/diamond-wheel-calculator" hreflang="tr" lang="tr">
+            <img src="/images/flags/tr.png" alt="Türkçe" width="20" height="15"/>
+            Türkçe
+        </a>
+        <a href="/es/tools/diamond-wheel-calculator" hreflang="es" lang="es">
+            <img src="/images/flags/es.png" alt="Español" width="20" height="15"/>
+            Español
+        </a>
+        <a href="/ru/tools/diamond-wheel-calculator" hreflang="ru" lang="ru">
+            <img src="/images/flags/ru.png" alt="Русский" width="20" height="15"/>
+            Русский
+        </a>
+        <a href="/de/tools/diamond-wheel-calculator" hreflang="de" lang="de">
+            <img src="/images/flags/de.png" alt="Deutsch" width="20" height="15"/>
+            Deutsch
+        </a>
+        <a href="/fr/tools/diamond-wheel-calculator" hreflang="fr" lang="fr">
+            <img src="/images/flags/fr.png" alt="Français" width="20" height="15"/>
+            Français
+        </a>
+        <a href="/pt/tools/diamond-wheel-calculator" hreflang="pt" lang="pt">
+            <img src="/images/flags/pt.png" alt="Português" width="20" height="15"/>
+            Português
+        </a>
+        <a href="/it/tools/diamond-wheel-calculator" hreflang="it" lang="it">
+            <img src="/images/flags/it.png" alt="Italiano" width="20" height="15"/>
+            Italiano
+        </a>
+        <a href="/pl/tools/diamond-wheel-calculator" hreflang="pl" lang="pl">
+            <img src="/images/flags/pl.png" alt="Polski" width="20" height="15"/>
+            Polski
+        </a>
+    </div>
+</div>
+                    </div>
+            </nav>
+        </div>
+    </header>
+    <!-- end header section -->
+</div>
+
+<!-- Calculator Section -->
+<section class="article-detail-section layout_padding tg-tool-page">
+    <div class="container">
+        <div class="dw-calc-header">
+            <h1>Diamond / CBN Grinding Wheel Calculator</h1>
+            <p>Select and verify basic parameters for superabrasive grinding wheels</p>
+        </div>
+
+        <div class="tg-disclaimer" role="note">
+            <strong>Technical Disclaimer:</strong> Results are typical industry estimates for preliminary setup only. Surface speed limits vary by wheel manufacturer — always verify against the maximum operating speed printed on your grinding wheel (per EN 13218 / ANSI B7.1). Validate all parameters with a trial grind before production.
+        </div>
+
+        <!-- Wheel Parameters -->
+        <div class="dw-calc-section">
+            <h2>Wheel Parameters</h2>
+            <div class="dw-form-grid">
+                <div class="dw-form-group">
+                    <label for="wheelType">Wheel Type</label>
+                    <select id="wheelType">
+                        <option value="diamond">Diamond</option>
+                        <option value="cbn">CBN</option>
+                    </select>
+                </div>
+                <div class="dw-form-group">
+                    <label for="diameter">Wheel Diameter (mm)</label>
+                    <input type="number" id="diameter" min="1" step="0.1" value="150">
+                </div>
+                <div class="dw-form-group">
+                    <label for="width">Wheel Width (mm)</label>
+                    <input type="number" id="width" min="0.1" step="0.1" value="20">
+                </div>
+                <div class="dw-form-group">
+                    <label for="bore">Bore Diameter (mm)</label>
+                    <input type="number" id="bore" min="1" step="0.1" value="32">
+                </div>
+                <div class="dw-form-group">
+                    <label for="gritSize">Grit Size (US Mesh)</label>
+                    <select id="gritSize">
+                        <option value="20">20/25 - Very Coarse</option>
+                        <option value="30">30/40 - Coarse</option>
+                        <option value="40">40/50 - Coarse</option>
+                        <option value="50">50/60 - Medium</option>
+                        <option value="60" selected>60/80 - Medium</option>
+                        <option value="80">80/100 - Medium-Fine</option>
+                        <option value="100">100/120 - Fine</option>
+                        <option value="120">120/140 - Fine</option>
+                        <option value="170">170/200 - Very Fine</option>
+                        <option value="230">230/270 - Very Fine</option>
+                        <option value="325">325/400 - Ultra Fine</option>
+                        <option value="500">500/600 - Mirror Finish</option>
+                    </select>
+                </div>
+                <div class="dw-form-group">
+                    <label for="concentration">Concentration (%)</label>
+                    <select id="concentration">
+                        <option value="25">25% - Light</option>
+                        <option value="50">50% - Medium</option>
+                        <option value="75" selected>75% - Standard</option>
+                        <option value="100">100% - High</option>
+                        <option value="125">125% - Very High</option>
+                        <option value="150">150% - Ultra High</option>
+                    </select>
+                </div>
+                <div class="dw-form-group">
+                    <label for="bondType">Bond Type</label>
+                    <select id="bondType">
+                        <option value="resin">Resin Bond</option>
+                        <option value="vitrified" selected>Vitrified Bond</option>
+                        <option value="metal">Metal Bond</option>
+                        <option value="electroplated">Electroplated</option>
+                    </select>
+                </div>
+                <div class="dw-form-group">
+                    <label for="material">Workpiece Material</label>
+                    <select id="material">
+                        <option value="steel">Steel (Carbon / Alloy)</option>
+                        <option value="stainless">Stainless Steel</option>
+                        <option value="castiron">Cast Iron</option>
+                        <option value="hardened">Hardened Steel (&gt;45 HRC)</option>
+                        <option value="tungsten">Tungsten Carbide</option>
+                        <option value="ceramic">Technical Ceramic</option>
+                        <option value="glass">Glass / Quartz</option>
+                        <option value="silicon">Silicon / Semiconductor</option>
+                        <option value="titanium">Titanium / Superalloy</option>
+                        <option value="ptfe">PTFE / Composites</option>
+                    </select>
+                </div>
+                <div class="dw-form-group">
+                    <label for="rpm">Machine RPM</label>
+                    <input type="number" id="rpm" min="100" step="10" value="3000">
+                </div>
+            </div>
+        </div>
+
+        <!-- Grinding Conditions -->
+        <div class="dw-calc-section">
+            <h2>Grinding Conditions</h2>
+            <div class="dw-form-grid">
+                <div class="dw-form-group">
+                    <label for="depthOfCut">Depth of Cut (mm)</label>
+                    <input type="number" id="depthOfCut" min="0.001" step="0.001" value="0.01">
+                </div>
+                <div class="dw-form-group">
+                    <label for="tableSpeed">Table / Feed Speed (m/min)</label>
+                    <input type="number" id="tableSpeed" min="0.1" step="0.1" value="10">
+                </div>
+                <div class="dw-form-group">
+                    <label for="coolant">Coolant</label>
+                    <select id="coolant">
+                        <option value="flood">Flood Coolant</option>
+                        <option value="mist">Mist Coolant</option>
+                        <option value="dry">Dry Grinding</option>
+                        <option value="cryogenic">Cryogenic</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button id="calculateBtn" class="dw-calc-btn">Calculate Parameters</button>
+
+        <!-- Results Section -->
+        <div class="dw-results" id="outputSection">
+            <h2>Surface Speed &amp; RPM Calculator Results</h2>
+
+            <div class="dw-result-cards">
+                <div class="dw-result-card primary">
+                    <h3>Surface Speed</h3>
+                    <div class="dw-result-value" id="surfaceSpeed">--</div>
+                    <div class="dw-result-unit">m/s</div>
+                </div>
+                <div class="dw-result-card">
+                    <h3>Surface Speed</h3>
+                    <div class="dw-result-value" id="surfaceSpeedFpm">--</div>
+                    <div class="dw-result-unit">ft/min</div>
+                </div>
+                <div class="dw-result-card">
+                    <h3>Wheel Volume</h3>
+                    <div class="dw-result-value" id="wheelVolume">--</div>
+                    <div class="dw-result-unit">cm&sup3;</div>
+                </div>
+                <div class="dw-result-card">
+                    <h3>Wheel Weight (est.)</h3>
+                    <div class="dw-result-value" id="wheelWeight">--</div>
+                    <div class="dw-result-unit">kg</div>
+                </div>
+            </div>
+
+            <h3 class="dw-section-divider">Recommended Parameters</h3>
+            <div class="dw-result-table-wrap">
+                <table class="dw-result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Recommended Value</th>
+                            <th>Unit</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recommendedParams">
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 class="dw-section-divider">Basic Grinding Parameters</h3>
+            <div class="dw-result-table-wrap">
+                <table class="dw-result-table">
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Value</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grindingParams">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="dw-warnings-card" id="warningsCard" style="display:none;">
+                <h3>Warnings</h3>
+                <ul id="warningsList"></ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="tg-about-section">
+<div class="container">
+<div class="tg-about-box">
+    <h2>About This Calculator</h2>
+    <p>
+        This grinding wheel calculator helps engineers verify wheel parameters, surface speeds, and recommended grinding conditions for diamond and CBN superabrasive wheels. It calculates surface speed in m/s and ft/min, material removal rate (MRR), grinding power, G-ratio, and chip thickness.
+    </p>
+    <p>
+        The tool provides safety warnings for overspeed conditions and incorrect abrasive-material pairings, making it useful for both initial wheel selection and production parameter verification.
+    </p>
+    <div class="tg-about-faq">
+        <h3>Frequently Asked Questions</h3>
+        <details style="margin-bottom: 12px; padding: 12px; background: #f8f9fa; border-radius: 6px;">
+            <summary style="cursor: pointer; font-weight: 600; color: #333;">How do I calculate grinding wheel surface speed?</summary>
+            <p style="margin-top: 8px; color: #555; line-height: 1.6;">Surface speed (m/s) = π × Wheel Diameter (m) × RPM ÷ 60. For example, a 150mm diameter wheel at 3000 RPM has a surface speed of π × 0.150 × 3000 ÷ 60 = 23.6 m/s.</p>
+        </details>
+        <details style="margin-bottom: 12px; padding: 12px; background: #f8f9fa; border-radius: 6px;">
+            <summary style="cursor: pointer; font-weight: 600; color: #333;">What is MRR (Material Removal Rate)?</summary>
+            <p style="margin-top: 8px; color: #555; line-height: 1.6;">MRR = Depth of Cut × Wheel Width × Table Speed. It measures how much material is removed per minute, typically in cm³/min. Higher MRR means faster grinding but may affect surface finish.</p>
+        </details>
+        <details style="margin-bottom: 12px; padding: 12px; background: #f8f9fa; border-radius: 6px;">
+            <summary style="cursor: pointer; font-weight: 600; color: #333;">What is the maximum safe speed for grinding wheels?</summary>
+            <p style="margin-top: 8px; color: #555; line-height: 1.6;">Maximum safe speed depends on bond type: resin bond ≤35 m/s, vitrified bond ≤60 m/s, metal bond ≤30 m/s, electroplated ≤40 m/s. Exceeding these limits risks wheel breakage. These are typical industry values — always verify against the maximum operating speed printed on the specific grinding wheel.</p>
+        </details>
+        <details style="margin-bottom: 12px; padding: 12px; background: #f8f9fa; border-radius: 6px;">
+            <summary style="cursor: pointer; font-weight: 600; color: #333;">Should I use flood coolant for diamond wheel grinding?</summary>
+            <p style="margin-top: 8px; color: #555; line-height: 1.6;">Flood coolant is recommended for most diamond and CBN grinding operations. It extends wheel life, improves surface finish, and prevents thermal damage. Dry grinding is generally not recommended for resin bond wheels.</p>
+        </details>
+        <details style="margin-bottom: 12px; padding: 12px; background: #f8f9fa; border-radius: 6px;">
+            <summary style="cursor: pointer; font-weight: 600; color: #333;">How do I convert SFPM to RPM?</summary>
+            <p style="margin-top: 8px; color: #555; line-height: 1.6;">To convert wheel surface speed to spindle speed: RPM = (SFPM × 12) ÷ (π × wheel diameter in inches). For example, 4638 SFPM on a 6-inch wheel gives RPM = (4638 × 12) ÷ (π × 6) ≈ 2950.</p>
+        </details>
+        <details style="margin-bottom: 0; padding: 12px; background: #f8f9fa; border-radius: 6px;">
+            <summary style="cursor: pointer; font-weight: 600; color: #333;">What is G-ratio in grinding?</summary>
+            <p style="margin-top: 8px; color: #555; line-height: 1.6;">G-ratio is the ratio of workpiece material removed to grinding wheel volume worn away. A G-ratio of 30 means 30 cm³ of material removed per 1 cm³ of wheel wear. Higher G-ratio means longer wheel life and lower wheel cost per part. Typical values range from under 10 for conventional abrasives to well over 100 for metal-bond superabrasive wheels.</p>
+        </details>
+    </div>
+</div>
+<p class="tg-about-note">Values provided by this calculator are typical industry estimates for preliminary setup only. Always verify against your machine specifications and the maximum operating speed stamped on the grinding wheel (per EN 13218 / ANSI B7.1). Run a trial grind before production.</p>
+</div>
+</section>
+
+<section style="padding: 40px 0 0;">
+    <div class="container">
+        <div style="background: linear-gradient(135deg, #1a2744 0%, #2a3f6a 100%); border-radius: 12px; padding: 40px; text-align: center; color: #fff;">
+            <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">Need Help Selecting the Right Grinding Wheel?</h2>
+            <p style="font-size: 16px; line-height: 1.7; max-width: 720px; margin: 0 auto 24px; color: #d9e2f1;">
+                These tools provide preliminary guidance based on general engineering principles. Every grinding application has unique variables — wheel specification, machine condition, coolant strategy, and process targets. With over 20 years of experience manufacturing diamond and CBN superabrasive wheels, the SinoGrind engineering team can review your application and recommend a wheel tailored to your exact requirements.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+                <a href="/contact" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: #4a6cf7; color: #fff; border-radius: 6px; text-decoration: none; font-weight: 600; transition: background 0.2s;">
+                    Contact Our Engineers
+                </a>
+                <a href="https://wa.me/8615874211461" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: #25D366; color: #fff; border-radius: 6px; text-decoration: none; font-weight: 600; transition: opacity 0.2s;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp Us
+                </a>
+                <a href="mailto:Jasper@sinogrind.com?subject=Grinding%20Wheel%20Application%20Consultation" style="display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.5); border-radius: 6px; text-decoration: none; font-weight: 600; transition: border-color 0.2s, background 0.2s;">
+                    Email Jasper@sinogrind.com
+                </a>
+            </div>
+            <p style="margin-top: 20px; font-size: 14px; color: #9db8d9;">Free consultation &bull; Custom wheel specifications &bull; Global shipping</p>
+        </div>
+    </div>
+</section>
+
+<!-- info section -->
+<section style="padding: 60px 0; background-color: #f8f9fa;">
+    <div class="container">
+        <div class="heading_container" style="text-align: center; margin: 40px 0 30px;">
+            <h2>Related Products</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <a href="/grindingWheel" style="text-decoration: none;">
+                    <div class="product-card" style="text-align: center; padding: 20px; border: 1px solid #eee; border-radius: 8px; transition: box-shadow 0.3s;">
+                        <img src="/images/products/p (3).webp" alt="CBN Grinding Wheels" style="max-height: 120px; margin-bottom: 15px;">
+                        <h4 style="color: #0c4da2; font-size: 16px;">CBN Grinding Wheels</h4>
+                        <p style="color: #666; font-size: 14px;">High-speed CBN wheels for hardened steel</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/externalGrindingMachine" style="text-decoration: none;">
+                    <div class="product-card" style="text-align: center; padding: 20px; border: 1px solid #eee; border-radius: 8px; transition: box-shadow 0.3s;">
+                        <img src="/images/products/egm (1).webp" alt="External Grinding Machine" style="max-height: 120px; margin-bottom: 15px;">
+                        <h4 style="color: #0c4da2; font-size: 16px;">External Grinding Machine</h4>
+                        <p style="color: #666; font-size: 14px;">CNC OD grinders for shaft grinding</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/grindingRods" style="text-decoration: none;">
+                    <div class="product-card" style="text-align: center; padding: 20px; border: 1px solid #eee; border-radius: 8px; transition: box-shadow 0.3s;">
+                        <img src="/images/products/resin_bond_grinding_rods1.webp" alt="Grinding Rods" style="max-height: 120px; margin-bottom: 15px;">
+                        <h4 style="color: #0c4da2; font-size: 16px;">Grinding Rods</h4>
+                        <p style="color: #666; font-size: 14px;">Resin and metal bond grinding rods</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a href="/grindingAccessories" style="text-decoration: none;">
+                    <div class="product-card" style="text-align: center; padding: 20px; border: 1px solid #eee; border-radius: 8px; transition: box-shadow 0.3s;">
+                        <img src="/images/products/grinding-accessories-1.webp" alt="Grinding Accessories" style="max-height: 120px; margin-bottom: 15px;">
+                        <h4 style="color: #0c4da2; font-size: 16px;">Grinding Accessories</h4>
+                        <p style="color: #666; font-size: 14px;">Plates, flanges, and adapters</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="related-articles layout_padding">
+    <div class="container">
+        <div class="heading_container" style="text-align: center; margin: 60px 0 40px;">
+            <h2>Related Articles</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="/images/articles/grinding-wheel-selection-guide-featured.webp" class="lazy-img" data-src="/images/articles/grinding-wheel-selection-guide-featured.webp" alt="Grinding wheel selection">
+                    </div>
+                    <div class="article-content">
+                        <span class="article-category">Tips &amp; Guides</span>
+                        <h3>How to Choose Grinding Wheel</h3>
+                        <div class="article-meta">February 15, 2026 &bull; 7 min read</div>
+                        <p class="article-excerpt">A complete technical guide to selecting the right grinding wheel for your application.</p>
+                        <a href="/articles/how_to_choose_grinding_wheel" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="/images/articles/surface_finish_optimization.webp" class="lazy-img" data-src="/images/articles/surface_finish_optimization.webp" alt="Surface finish">
+                    </div>
+                    <div class="article-content">
+                        <span class="article-category">Tips &amp; Guides</span>
+                        <h3>Surface Finish Optimization</h3>
+                        <div class="article-meta">May 15, 2026 &bull; 6 min read</div>
+                        <p class="article-excerpt">How grit size and wheel parameters affect surface finish quality.</p>
+                        <a href="/articles/grinding_wheel_surface_finish" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="article-card">
+                    <div class="article-image">
+                        <img src="/images/articles/grinding_wheel_bonds.webp" class="lazy-img" data-src="/images/articles/grinding_wheel_bonds.webp" alt="Grinding wheel bonds">
+                    </div>
+                    <div class="article-content">
+                        <span class="article-category">Technology</span>
+                        <h3>Understanding Grinding Wheel Bonds</h3>
+                        <div class="article-meta">May 1, 2026 &bull; 8 min read</div>
+                        <p class="article-excerpt">Choosing the right bond type: resin, vitrified, metal, and electroplated.</p>
+                        <a href="/articles/grinding_wheel_bonds_guide" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="tg-related-tools">
+    <div class="container">
+        <div class="heading_container" style="text-align: center; margin-bottom: 30px;">
+            <h2>Related Tools</h2>
+        </div>
+        <div class="tg-tools-grid2">
+            <a href="/tools/diamond-cbn-grit-size-converter" class="tg-tool-link">
+                <div class="tg-tool-icon">🔢</div>
+                <h3>Grit Size Converter</h3>
+                <p>Convert between FEPA, mesh, and micron grit designations.</p>
+            </a>
+            <a href="/tools/grinding-wheel-specification-generator" class="tg-tool-link">
+                <div class="tg-tool-icon">📋</div>
+                <h3>Specification Generator</h3>
+                <p>Generate structured specs for RFQs and quotations.</p>
+            </a>
+            <a href="/tools/diamond-cbn-wheel-selection-tool" class="tg-tool-link">
+                <div class="tg-tool-icon">🎯</div>
+                <h3>Wheel Selection Tool</h3>
+                <p>Get recommendations for the right diamond or CBN wheel.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="info_section ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="info_logo">
+                    <a class="navbar-brand" href="/">
+                        <!--  -->
+                        <span>
+                SINOGRIND
+              </span>
+                    </a>
+                    <p>
+                        Over 20 years of grinding expertise. Diamond, CBN, and conventional abrasive solutions for precision manufacturing worldwide.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="info_links">
+                    <h5>Useful Links</h5>
+                    <ul>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/products">All Products</a></li>
+                        <li><a href="/grindingWheel">Grinding Wheels</a></li>
+                        <li><a href="/centerlessGrinding">Centerless Grinding Wheels</a></li>
+                        <li><a href="/dressingTools">Diamond Dressing Tools</a></li>
+                        <li><a href="/cbnCuttingTools">CBN Cutting Tools</a></li>
+                        <li><a href="/grindingAccessories">Grinding Accessories</a></li>
+                        <li><a href="/grindingRods">Grinding Rods</a></li>
+                        <li><a href="/externalGrindingMachine">External Grinding Machine</a></li>
+                        <li><a href="/internalGrindingMachine">Internal Grinding Machine</a></li>
+                        <li><a href="/cnc_tools">CNC Tools</a></li>
+                        <li><a href="/articles">Articles</a></li>
+                        <li><a href="/tools">Tools</a></li>
+                        <li><a href="/download">Download</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="info_info">
+                    <h5>
+                        Contact Us
+                    </h5>
+                    <a href="https://maps.app.goo.gl/6NsTGsSWrZQKmpGh8" class="contact_link1" target="_blank">
+                        <img class="lazy-img" src="/images/location.png" data-src="/images/location.png" alt="Location" />
+                        <span>
+                2nd Floor, A237, R2-B Building, High-tech Industrial Village, No. 206 Gaoxin South 7th Road, Yuehai Street, High-tech Zone, Nanshan District, Shenzhen City
+              </span>
+                    </a>
+                    <br>
+                    <a href="tel:+8615874211461" class="contact_link2">
+                        <img class="lazy-img" src="/images/call.png" data-src="/images/call.png" alt="Phone" />
+                        <span>Call : +86 15874211461</span>
+                    </a>
+                    <br>
+                    <a href="tel:+8617680371696" class="contact_link2">
+                        <img class="lazy-img" src="/images/call.png" data-src="/images/call.png" alt="Phone" />
+                        <span>Call : +86 17680371696</span>
+                    </a>
+                    <br>
+                    <a href="mailto:Jasper@sinogrind.com" class="contact_link3">
+                        <img class="lazy-img" src="/images/mail.png" data-src="/images/mail.png" alt="Email" />
+                        <span>
+                Jasper@sinogrind.com
+              </span>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="info_form">
+                    <h5>
+                        Social
+                    </h5>
+                    <div class="row">
+                        <img style="width: 40%; height: 40%; margin-top: 1%; margin-left: 1%; margin-bottom: 1%; margin-right: 1%" alt="SinoGrind WeChat QR code - contact 1" src="/images/contacts/wechat.webp">
+                        <img style="width: 40%; height: 40%; margin-top: 1%; margin-left: 1%; margin-bottom: 1%; margin-right: 1%" alt="SinoGrind WeChat QR code - contact 2" src="/images/contacts/wechat2.webp">
+                    </div>
+                    <div class="social_box">
+                        <a href="https://www.facebook.com/sinogrind" target="_blank">
+                            <img class="lazy-img" data-src="/images/fb.png" alt="Facebook">
+                        </a>
+                        <a href="/">
+                            <img class="lazy-img" data-src="/images/twitter.png" alt="Twitter">
+                        </a>
+                        <a href="https://www.linkedin.com/company/sinogrind-co-ltd/" target="_blank">
+                            <img class="lazy-img" data-src="/images/linkedin.png" alt="LinkedIn">
+                        </a>
+                        <a href="/">
+                            <img class="lazy-img" data-src="/images/instagram.png" alt="Instagram">
+                        </a>
+                        <a href="https://wa.me/8615874211461" target="_blank">
+                            <img class="lazy-img" data-src="/images/whatsapp.png" alt="WhatsApp">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- end info_section -->
+
+<!-- footer section -->
+<footer class="container-fluid footer_section">
+    <div class="sideBar">
+        <div>
+            <div class="tips"><span>Contact</span></div>
+            <ul class="list">
+                <li>
+                    <a href="https://wa.me/8615874211461" target="_blank">
+                        <img class="lazy-img" data-src="/images/whatsapp.png" alt="WhatsApp">
+                        Whatsapp1
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wa.me/8617680371696" target="_blank">
+                        <img class="lazy-img" data-src="/images/whatsapp.png" alt="WhatsApp">
+                        Whatsapp2
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.linkedin.com/company/sinogrind-co-ltd/" target="_blank">
+                        <img class="lazy-img" data-src="/images/linkedin.png" alt="LinkedIn">
+                        Linkedin
+                    </a>
+                </li>
+                <li>
+                    <a href="/">
+                        <img class="lazy-img" data-src="/images/twitter.png" alt="Twitter">
+                        twitter
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/sinogrind" target="_blank">
+                        <img class="lazy-img" data-src="/images/fb.png" alt="Facebook">
+                        facebook
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <p>Copyright&copy; 2002-<script>document.write(new Date().getFullYear());</script> SINOGRIND CO.,LTD. All Rights Reserved. 中研深圳国际贸易有限公司版权所有。</p>
+</footer>
+<!-- footer section -->
+
+<script data-cfasync="false" type="text/javascript" th:src="${cdnBase} + '/js/jquery-3.4.1.min.js'" defer></script>
+<script type="text/javascript" th:src="${cdnBase} + '/js/bootstrapminified.js'" defer></script>
+
+<script th:src="${cdnBase} + '/js/website.js'" defer></script>
+<script th:inline="javascript">
+    
+
+    //图片懒加载
+    /*<![CDATA[*/
+    window.CDN_BASE = /*[[${cdnBase}]]*/ '';
+    /*]]>*/
+
+    document.addEventListener("DOMContentLoaded", function() {
+  var images = document.querySelectorAll('[data-src]');
+  
+  if ('IntersectionObserver' in window) {
+    var imageObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          var src = img.getAttribute('data-src');
+          if (src) {
+            img.src = src;
+          }
+          imageObserver.unobserve(img);
+        }
+      });
+    }, { rootMargin: "200px 0px" });
+
+    images.forEach(function(img) {
+      if (img.nodeType === 1) {
+        imageObserver.observe(img);
+      }
+    });
+  } else {
+    images.forEach(function(img) {
+      var src = img.getAttribute('data-src');
+      if (src) {
+        img.src = src;
+      }
+    });
+  }
+});
+</script>
+
+<!-- Language Switcher JavaScript -->
+<script>
+function toggleLangDropdown() {
+    var dropdown = document.getElementById("langDropdown");
+    dropdown.classList.toggle("active");
+}
+document.addEventListener("click", function(event) {
+    var dropdown = document.getElementById("langDropdown");
+    var btn = document.getElementById("currentLang");
+    if (dropdown && !dropdown.contains(event.target) && !btn.contains(event.target)) {
+        dropdown.classList.remove("active");
+    }
+});
+</script>
+
+<!-- Calculator Logic -->
+<script th:src="${cdnBase} + '/js/tools.js'" defer></script>
+
 </body>
 </html>
