@@ -9,6 +9,12 @@ Supported:
 - Resin bond
 - Metal bond
 
+## Live Demo
+
+[Launch the Grinding Wheel Specification Generator](https://sinogrind.com/tools/diamond-wheel-calculator)
+
+No installation or build tools are required. The generator runs directly in a modern web browser.
+
 ## Overview
 
 This tool helps grinding engineers and machinists quickly verify wheel parameters, surface speeds, and recommended grinding conditions for diamond and CBN (Cubic Boron Nitride) superabrasive wheels.
